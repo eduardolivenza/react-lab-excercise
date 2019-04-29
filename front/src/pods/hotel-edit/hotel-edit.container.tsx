@@ -22,18 +22,18 @@ const HotelEditContainerInner = (props: Props) => {
     setHotel(hotelMockData);
   }, []);
 
-  const onFieldUpdate = (id: keyof HotelEntityVm, value: any) => {
+  const onFieldUpdate = (fieldName: keyof HotelEntityVm, value: any) => {
     setHotel({
       ...hotel,
-      [id]: value
+      [fieldName]: value
     });
 
     HotelEditFormValidation
-      .validateField(hotel, name, value)
+      .validateField(hotel, fieldName, value)
       .then(fieldValidationResult => {
         setHotelFormErrors({
           ...hotelFormErrors,
-          [name]: fieldValidationResult
+          [fieldName]: fieldValidationResult
         });
       });
   };
