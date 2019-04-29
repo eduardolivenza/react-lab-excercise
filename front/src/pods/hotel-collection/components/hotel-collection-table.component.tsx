@@ -1,7 +1,8 @@
 import * as React from "react";
-import { HotelEntityVm } from "./../hotel-collection.vm";
+import { HotelEntityVm } from "pods/hotel-collection/hotel-collection.vm";
 import { Table, TableHead, TableRow, TableCell, TableBody } from "@material-ui/core";
 import { WithStyles, createStyles, Icon, withStyles } from "@material-ui/core";
+import { HotelRowComponent } from "./hotel-tableRow.component";
 
 interface Props extends WithStyles<typeof styles> {
     hotelCollection: HotelEntityVm[];
@@ -11,11 +12,7 @@ interface Props extends WithStyles<typeof styles> {
 const styles = theme => createStyles({
     table: {
     },
-    tableRowHover: {
-        '&:hover': {
-            backgroundColor: theme.palette.grey[200],
-        },
-    },
+  
 });
 
 const HotelCollectionTableComponentInner = (props: Props) => {
@@ -32,19 +29,9 @@ const HotelCollectionTableComponentInner = (props: Props) => {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {
-                    hotelCollection.map(row => (
-                        <TableRow key={row.id} onDoubleClick={() => editHotel(row.id)} className={classes.tableRowHover}>
-                            <TableCell align="right">
-                                <img width='80px' src={row.picture}/>
-                            </TableCell>
-                            <TableCell align="right">{row.name}</TableCell>
-                            <TableCell align="right">{row.description}</TableCell>
-                            <TableCell align="right">{row.rating}</TableCell>
-                            <TableCell align="right">{row.address}</TableCell>
-                        </TableRow>
-                    ))
-                }
+            {
+                hotelCollection.map(hotel => (<HotelRowComponent key={hotel.id} hotel={hotel} editHotel={editHotel}/>)   )
+            }
             </TableBody>
         </Table>
     );
