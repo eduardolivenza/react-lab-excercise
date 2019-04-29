@@ -22,5 +22,9 @@ export const citiesLookup: LookupEntity[] = [
   {
     id: "California",
     value: "California"
+  },
+  {
+    id: "Burlingame",
+    value: "Burlingame"
   }
 ];

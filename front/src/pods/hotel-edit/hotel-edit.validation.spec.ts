@@ -29,7 +29,7 @@ describe('Hotel Edit Validation tests', () => {
             const viewModel = {
                 name: 'arts',
                 city: 'Barcelona',
-                description: 'Less 10'
+                description: 'Description'
             };
 
             // Act
@@ -37,7 +37,8 @@ describe('Hotel Edit Validation tests', () => {
                 .validateField(viewModel, 'city', "")
                 .then(fieldValidationResult => {
                     // assert
-                    expect(fieldValidationResult.errorMessage).toEqual('Please fill in this mandatory field.');
+                    expect(fieldValidationResult.succeeded).toBeFalsy();
+                    //expect(fieldValidationResult.errorMessage).toEqual('Please fill in this mandatory field.');
                     done();
                 });
 
