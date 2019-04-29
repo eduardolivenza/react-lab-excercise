@@ -1,8 +1,8 @@
 import { validateRangeNumber, VALIDATION_TYPE } from './range-number';
 import { FieldValidationResult } from 'lc-form-validation';
 
-describe('validateMinimumStarNumber test', () => {
-    describe('starsNumber =>', () => {
+describe('validateRangeNumber test', () => {
+    describe('rangeNumber =>', () => {
         it('should invalidate when value is higher than 5', () => {
             const viewModel = { rating: 7 };
             // Act
@@ -38,7 +38,6 @@ describe('validateMinimumStarNumber test', () => {
                 succeeded: false,
                 type: VALIDATION_TYPE,
             } as FieldValidationResult);
-
         });
         it('should validate when value range is between 3 and 5 both included', () => {
             const viewModel = { rating: 4 };
