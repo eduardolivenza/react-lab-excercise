@@ -12,6 +12,10 @@ const HotelEditFormValidationConstraints: ValidationConstraints = {
             { validator: Validators.required },
             {
                 validator: Validators.maxLength,
+                customParams: { length: 250 }
+            },
+            {
+                validator: Validators.minLength,
                 customParams: { length: 10 }
             }]
 
