@@ -1,6 +1,6 @@
 import {HotelEditEntityApi} from './hotel-edit.api';
 import {HotelEntityVm} from './hotel-edit.vm';
-import {basePicturesUrl} from 'core';
+import {basePicturesUrl} from '../../core';
 
 export const mapFromApiToVm = (apiEntity : HotelEditEntityApi) : HotelEntityVm => ({
     id : apiEntity.id,
