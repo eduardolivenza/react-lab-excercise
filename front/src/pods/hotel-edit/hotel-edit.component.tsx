@@ -8,7 +8,7 @@ import {
 import { TextFieldForm, DropdownForm, TextAreaForm } from "common/components";
 import { TextField, Button } from "@material-ui/core";
 import Rating from "material-ui-rating";
-import { HotelEntityVm, HotelEditFormErrors } from "./hotel-edit.vm";
+import { HotelEntityVm, HotelFormErrors } from "./hotel-edit.vm";
 import { LookupEntity } from "core";
 import { RatingForm } from "common/components";
 
@@ -29,11 +29,11 @@ interface Props extends WithStyles<typeof styles> {
   cities: LookupEntity[];
   onFieldUpdate: (id: string, value: any) => void;
   onSave: () => void;
-  hotelEditFormErrors: HotelEditFormErrors;
+  hotelFormErrors: HotelFormErrors;
 }
 
 export const HotelEditComponentInner = (props: Props) => {
-  const { classes, hotel, cities, onFieldUpdate, onSave, hotelEditFormErrors } = props;
+  const { classes, hotel, cities, onFieldUpdate, onSave, hotelFormErrors } = props;
 
   return (
     <div className={classes.formContainer}>
@@ -42,6 +42,7 @@ export const HotelEditComponentInner = (props: Props) => {
         name="name"
         value={hotel.name}
         onChange={onFieldUpdate}
+        error={hotelFormErrors.name.errorMessage}
       />
       {/* for multilanguage support rather use formErrors.name.type */}
 
@@ -60,7 +61,7 @@ export const HotelEditComponentInner = (props: Props) => {
         onChange={onFieldUpdate}
         value={hotel.city}
         list={cities}
-        error={hotelEditFormErrors.city.errorMessage}
+        error={hotelFormErrors.city.errorMessage}
       />
 
       <TextAreaForm
@@ -69,6 +70,7 @@ export const HotelEditComponentInner = (props: Props) => {
         label="description"
         value={hotel.description}
         onChange={onFieldUpdate}
+        error={hotelFormErrors.description.errorMessage}
       />
 
       <Button variant="contained" color="primary" onClick={onSave}>

@@ -16,7 +16,7 @@ export const validateValueMatchValidator = (value: any, vm: any, customParams: C
     validationPassed = executeValidation(value, customParams.stringToMatch);
   }
 
-  return buildFieldValidationResult(validationPassed);
+  return buildFieldValidationResult(!validationPassed);
 }
 
 
