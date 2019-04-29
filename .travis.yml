@@ -4,4 +4,5 @@ node_js:
   - "10.15.3"
 
 script:
+    - cd front
     - npm install && npm test
