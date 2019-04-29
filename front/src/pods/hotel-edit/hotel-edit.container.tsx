@@ -3,10 +3,12 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import { hotelEditRouteParams } from "core";
 import { HotelEditComponent } from "./hotel-edit.component";
 import { hotelMockData } from "./hotel-edit.mock";
-import { HotelEntityVm, createDefaultHotel } from "./hotel-edit.vm";
+import { HotelEntityVm, createDefaultHotel, HotelFormErrors, createDefaultHotelFormErrors } from "./hotel-edit.vm";
 import { citiesLookup } from "core";
 import { mapFromApiToVm } from "./hotel-edit.mapper";
 import { getHotelEdit } from './hotel-edit.api';
+import { FormValidationResult } from "lc-form-validation";
+import { HotelEditFormValidation } from "./hotel-edit.validation";
 
 interface Props extends RouteComponentProps {}
 
@@ -25,12 +27,18 @@ const useHotelEdit = () => {
 };
 
 
-interface Props extends RouteComponentProps {}
+
+interface Props extends RouteComponentProps { }
 
 const HotelEditContainerInner = (props: Props) => {
   const [cities] = React.useState(citiesLookup);
   const {hotel, setHotel, loadHotelEdit} = useHotelEdit();
   
+
+  const [hotelFormErrors, setHotelFormErrors] = React.useState<HotelFormErrors>(
+    createDefaultHotelFormErrors()
+  );
+
   React.useEffect(() => {
     loadHotelEdit(props.match.params[hotelEditRouteParams.id]);
   }, []);
@@ -40,10 +48,44 @@ const HotelEditContainerInner = (props: Props) => {
       ...hotel,
       [id]: value
     });
+
+    HotelEditFormValidation
+      .validateField(hotel, name, value)
+      .then(fieldValidationResult => {
+        setHotelFormErrors({
+          ...hotelFormErrors,
+          [name]: fieldValidationResult
+        });
+      });
   };
 
 
-  const doSave = () => {};
+  const doSave = () => {
+    HotelEditFormValidation.validateForm(hotel).then(formValidationResult => {
+      handleFormValidation(formValidationResult);
+    });
+  }
+
+  const handleFormValidation = (formValidation: FormValidationResult) => {
+    if (formValidation.succeeded) {
+      doSaveServerRequest();
+    } else {
+      showErrorNotification(formValidation);
+    }
+  }
+
+  const doSaveServerRequest = () => {
+    //save
+  }
+
+  const showErrorNotification = (formValidationResult: FormValidationResult) => {
+    alert("error, review the fields");
+    const updateHotelFormErrors = {
+      ...hotelFormErrors,
+      ...formValidationResult.fieldErrors
+    };
+    setHotelFormErrors(updateHotelFormErrors);
+  }
 
   return (
     <>
@@ -52,6 +94,7 @@ const HotelEditContainerInner = (props: Props) => {
         cities={cities}
         onFieldUpdate={onFieldUpdate}
         onSave={doSave}
+        hotelFormErrors={hotelFormErrors}
       />
     </>
   );
