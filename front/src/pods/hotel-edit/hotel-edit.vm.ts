@@ -1,3 +1,4 @@
+import { FieldValidationResult } from "lc-form-validation";
 
 export interface HotelEntityVm {
   id : string;
@@ -17,4 +18,12 @@ export const createDefaultHotel = ()  : HotelEntityVm => ({
   rating: 3,
   address: '',
   city: '',
+});
+
+export interface HotelEditFormErrors {
+  city: FieldValidationResult;
+}
+
+export const createDefaultHotelEditFormErrors = (): HotelEditFormErrors => ({
+  city: new FieldValidationResult()
 });
