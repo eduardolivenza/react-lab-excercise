@@ -48,18 +48,30 @@ const HotelEditContainerInner = (props: Props) => {
 
   const doSave = () => {
     HotelEditFormValidation.validateForm(hotel).then(formValidationResult => {
-      if (formValidationResult.succeeded) {
-        //save
-      } else {
-        alert("error, review the fields");
-        const updateHotelFormErrors = {
-          ...hotelFormErrors,
-          ...formValidationResult.fieldErrors
-        };
-        setHotelFormErrors(updateHotelFormErrors);
-      }
+      handleFormValidation(formValidationResult);
     });
-  };
+  }
+
+  const handleFormValidation = (formValidation: FormValidationResult) => {
+    if (formValidation.succeeded) {
+      doSaveServerRequest();
+    } else {
+      showErrorNotification(formValidation);
+    }
+  }
+
+  const doSaveServerRequest = () => {
+    //save
+  }
+
+  const showErrorNotification = (formValidationResult: FormValidationResult) => {
+    alert("error, review the fields");
+    const updateHotelFormErrors = {
+      ...hotelFormErrors,
+      ...formValidationResult.fieldErrors
+    };
+    setHotelFormErrors(updateHotelFormErrors);
+  }
 
   return (
     <>

@@ -9,7 +9,7 @@ describe('Hotel Edit Validation tests', () => {
             const viewModel = {
                 name: 'arts',
                 city: 'Barcelona',
-                description: 'Más de 10 letras para que pete'
+                description: 'Less 10'
             };
 
             // Act
@@ -17,12 +17,7 @@ describe('Hotel Edit Validation tests', () => {
                 .validateField(viewModel, 'name', "")
                 .then(fieldValidationResult => {
                     // assert
-                    expect(fieldValidationResult).toEqual({
-                        errorMessage: 'Please fill in this mandatory field.',
-                        key: 'name',
-                        succeeded: false,
-                        type: 'REQUIRED'
-                    } as FieldValidationResult);
+                    expect(fieldValidationResult.errorMessage).toEqual('Please fill in this mandatory field.');
                     done();
                 });
 
@@ -34,7 +29,7 @@ describe('Hotel Edit Validation tests', () => {
             const viewModel = {
                 name: 'arts',
                 city: 'Barcelona',
-                description: 'Más de 10 letras para que pete'
+                description: 'Less 10'
             };
 
             // Act
@@ -42,12 +37,7 @@ describe('Hotel Edit Validation tests', () => {
                 .validateField(viewModel, 'city', "")
                 .then(fieldValidationResult => {
                     // assert
-                    expect(fieldValidationResult).toEqual({
-                        errorMessage: 'Please fill in this mandatory field.',
-                        key: 'city',
-                        succeeded: false,
-                        type: 'REQUIRED'
-                    } as FieldValidationResult);
+                    expect(fieldValidationResult.errorMessage).toEqual('Please fill in this mandatory field.');
                     done();
                 });
 
@@ -59,7 +49,7 @@ describe('Hotel Edit Validation tests', () => {
             const viewModel = {
                 name: 'arts',
                 city: 'Barcelona',
-                description: 'Más de 10 letras para que pete'
+                description: 'Less 10'
             };
 
             // Act
@@ -67,12 +57,7 @@ describe('Hotel Edit Validation tests', () => {
                 .validateField(viewModel, 'description', "")
                 .then(fieldValidationResult => {
                     // assert
-                    expect(fieldValidationResult).toEqual({
-                        errorMessage: 'Please fill in this mandatory field.',
-                        key: 'description',
-                        succeeded: false,
-                        type: 'REQUIRED'
-                    } as FieldValidationResult);
+                    expect(fieldValidationResult.errorMessage).toEqual('Please fill in this mandatory field.');
                     done();
                 });
 
@@ -84,7 +69,7 @@ describe('Hotel Edit Validation tests', () => {
             const viewModel = {
                 name: 'arts',
                 city: 'Barcelona',
-                description: 'Más de 10 letras para que pete'
+                description: 'Less 10'
             };
 
             // Act
@@ -92,12 +77,7 @@ describe('Hotel Edit Validation tests', () => {
                 .validateField(viewModel, 'name', "arts")
                 .then(fieldValidationResult => {
                     // assert
-                    expect(fieldValidationResult).toEqual({
-                        errorMessage: '',
-                        key: 'name',
-                        succeeded: true,
-                        type: 'REQUIRED'
-                    } as FieldValidationResult);
+                    expect(fieldValidationResult.succeeded).toBeTruthy();
                     done();
                 });
 
@@ -109,7 +89,7 @@ describe('Hotel Edit Validation tests', () => {
             const viewModel = {
                 name: 'arts',
                 city: 'Barcelona',
-                description: 'Más de 10 letras para que pete'
+                description: 'Less 10'
             };
 
             // Act
@@ -117,12 +97,7 @@ describe('Hotel Edit Validation tests', () => {
                 .validateField(viewModel, 'city', "Berlin")
                 .then(fieldValidationResult => {
                     // assert
-                    expect(fieldValidationResult).toEqual({
-                        errorMessage: '',
-                        key: 'city',
-                        succeeded: true,
-                        type: 'REQUIRED'
-                    } as FieldValidationResult);
+                    expect(fieldValidationResult.succeeded).toBeTruthy();
                     done();
                 });
 
@@ -134,7 +109,7 @@ describe('Hotel Edit Validation tests', () => {
             const viewModel = {
                 name: 'arts',
                 city: 'Barcelona',
-                description: 'Más de 10 letras para que pete'
+                description: 'Less 10'
             };
 
             // Act
@@ -142,12 +117,7 @@ describe('Hotel Edit Validation tests', () => {
                 .validateField(viewModel, 'description', "Correct")
                 .then(fieldValidationResult => {
                     // assert
-                    expect(fieldValidationResult).toEqual({
-                        errorMessage: '',
-                        key: 'description',
-                        succeeded: true,
-                        type: 'MAX_LENGTH'
-                    } as FieldValidationResult);
+                    expect(fieldValidationResult.succeeded).toBeTruthy();
                     done();
                 });
 
@@ -159,7 +129,7 @@ describe('Hotel Edit Validation tests', () => {
             const viewModel = {
                 name: 'arts',
                 city: 'Barcelona',
-                description: 'Más de 10 letras para que pete'
+                description: 'Less 10'
             };
 
             // Act
@@ -167,12 +137,7 @@ describe('Hotel Edit Validation tests', () => {
                 .validateField(viewModel, 'description', "Más de 10 letras para que pete")
                 .then(fieldValidationResult => {
                     // assert
-                    expect(fieldValidationResult).toEqual({
-                        errorMessage: 'The value provided is too long. Length must not exceed 10 characters.',
-                        key: 'description',
-                        succeeded: false,
-                        type: 'MAX_LENGTH'
-                    } as FieldValidationResult);
+                    expect(fieldValidationResult.errorMessage).toEqual('The value provided is too long. Length must not exceed 10 characters.');
                     done();
                 });
 
@@ -186,7 +151,7 @@ describe('Hotel Edit Validation tests', () => {
             const viewModel = {
                 name: 'arts',
                 city: 'Barcelona',
-                description: 'desc'
+                description: 'Less 10'
             };
 
             // Act
