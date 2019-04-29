@@ -104,7 +104,6 @@ describe('Hotel Edit Validation tests', () => {
         });
 
         it('should validate when description is correct', (done) => {
-
             // Arrange
             const viewModel = {
                 name: 'arts',
