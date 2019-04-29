@@ -1,7 +1,7 @@
 import { FieldValidationResult } from "lc-form-validation";
 
 const defaultInvalidMessage = 'Validation failed';
-export const VALIDATION_TYPE = 'FIELDS_MATCH';
+export const VALIDATION_TYPE = 'VALUE_MATCH';
 
 export interface CustomParams {
   stringToMatch : string;
