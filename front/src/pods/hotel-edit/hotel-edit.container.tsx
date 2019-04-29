@@ -7,6 +7,7 @@ import { HotelEntityVm, createDefaultHotel, HotelFormErrors, createDefaultHotelF
 import { citiesLookup } from "core";
 import { FormValidationResult } from "lc-form-validation";
 import { HotelEditFormValidation } from "./hotel-edit.validation";
+import { NotificationComponent } from "common/components";
 
 interface Props extends RouteComponentProps { }
 
@@ -17,6 +18,8 @@ const HotelEditContainerInner = (props: Props) => {
   const [hotelFormErrors, setHotelFormErrors] = React.useState<HotelFormErrors>(
     createDefaultHotelFormErrors()
   );
+
+  const [showValidationFailedMessage, setShowValidationFailedMessage] = React.useState(false);
 
   React.useEffect(() => {
     setHotel(hotelMockData);
@@ -65,12 +68,12 @@ const HotelEditContainerInner = (props: Props) => {
   }
 
   const showErrorNotification = (formValidationResult: FormValidationResult) => {
-    alert("error, review the fields");
     const updateHotelFormErrors = {
       ...hotelFormErrors,
       ...formValidationResult.fieldErrors
     };
     setHotelFormErrors(updateHotelFormErrors);
+    setShowValidationFailedMessage(true);
   }
 
   return (
@@ -82,6 +85,11 @@ const HotelEditContainerInner = (props: Props) => {
         onSave={doSave}
         hotelFormErrors={hotelFormErrors}
       />
+      <NotificationComponent
+                message="The form contains errors, please check"
+                show={showValidationFailedMessage}
+                onClose={() => setShowValidationFailedMessage(false)}
+            />
     </>
   );
 };
