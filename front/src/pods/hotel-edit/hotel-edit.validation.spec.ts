@@ -186,22 +186,53 @@ describe('Hotel Edit Validation tests', () => {
             const viewModel = {
                 name: 'arts',
                 city: 'Barcelona',
-                description: 'Description'
+                description: 'desc'
             };
 
             // Act
             HotelEditFormValidation.validateForm(viewModel).then(formValidationResult => {
-                    // assert
-                    expect(formValidationResult).toEqual({
-                        errorMessage: 'Please fill in this mandatory field.',
-                        key: 'name',
-                        succeeded: false,
-                        type: 'REQUIRED'
-                    } as FieldValidationResult);
-                    done();
-                });
+                // assert
+                expect(formValidationResult.succeeded).toBeTruthy();
+                done();
+            });
 
         });
-    
+
+        it('should validate when description has more than 10 characters', (done) => {
+
+            // Arrange
+            const viewModel = {
+                name: 'arts',
+                city: 'Barcelona',
+                description: 'More than 10 characters'
+            };
+
+            // Act
+            HotelEditFormValidation.validateForm(viewModel).then(formValidationResult => {
+                // assert
+                expect(formValidationResult.succeeded).toBeFalsy();
+                done();
+            });
+
+        });
+
+        it('should validate when some fields are empty', (done) => {
+
+            // Arrange
+            const viewModel = {
+                name: '',
+                city: 'Barcelona',
+                description: 'less10'
+            };
+
+            // Act
+            HotelEditFormValidation.validateForm(viewModel).then(formValidationResult => {
+                // assert
+                expect(formValidationResult.succeeded).toBeFalsy();
+                done();
+            });
+
+        });
+
     });
 });
