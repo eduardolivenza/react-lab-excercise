@@ -9,7 +9,7 @@ describe('Hotel Edit Validation tests', () => {
             const viewModel = {
                 name: 'arts',
                 city: 'Barcelona',
-                description: 'Less 10'
+                description: 'Description'
             };
 
             // Act
@@ -50,7 +50,7 @@ describe('Hotel Edit Validation tests', () => {
             const viewModel = {
                 name: 'arts',
                 city: 'Barcelona',
-                description: 'Less 10'
+                description: 'Description'
             };
 
             // Act
@@ -70,7 +70,7 @@ describe('Hotel Edit Validation tests', () => {
             const viewModel = {
                 name: 'arts',
                 city: 'Barcelona',
-                description: 'Less 10'
+                description: 'Description'
             };
 
             // Act
@@ -90,7 +90,7 @@ describe('Hotel Edit Validation tests', () => {
             const viewModel = {
                 name: 'arts',
                 city: 'Barcelona',
-                description: 'Less 10'
+                description: 'Description'
             };
 
             // Act
@@ -105,17 +105,16 @@ describe('Hotel Edit Validation tests', () => {
         });
 
         it('should validate when description is correct', (done) => {
-
             // Arrange
             const viewModel = {
                 name: 'arts',
                 city: 'Barcelona',
-                description: 'Less 10'
+                description: 'Description'
             };
 
             // Act
             HotelEditFormValidation
-                .validateField(viewModel, 'description', "Correct")
+                .validateField(viewModel, 'description', "Description")
                 .then(fieldValidationResult => {
                     // assert
                     expect(fieldValidationResult.succeeded).toBeTruthy();
@@ -124,21 +123,21 @@ describe('Hotel Edit Validation tests', () => {
 
         });
 
-        it('should invalidate when description is too long is correct', (done) => {
+        it('should invalidate when description is less than 10', (done) => {
 
             // Arrange
             const viewModel = {
                 name: 'arts',
                 city: 'Barcelona',
-                description: 'Less 10'
+                description: 'Description'
             };
 
             // Act
             HotelEditFormValidation
-                .validateField(viewModel, 'description', "Más de 10 letras para que pete")
+                .validateField(viewModel, 'description', "Less 10")
                 .then(fieldValidationResult => {
                     // assert
-                    expect(fieldValidationResult.errorMessage).toEqual('The value provided is too long. Length must not exceed 10 characters.');
+                    expect(fieldValidationResult.errorMessage).toEqual('The value provided must have at least 10 characters.');
                     done();
                 });
 
@@ -152,7 +151,7 @@ describe('Hotel Edit Validation tests', () => {
             const viewModel = {
                 name: 'arts',
                 city: 'Barcelona',
-                description: 'Less 10'
+                description: 'Description'
             };
 
             // Act
@@ -164,13 +163,13 @@ describe('Hotel Edit Validation tests', () => {
 
         });
 
-        it('should validate when description has more than 10 characters', (done) => {
+        it('should validate when description has more than 250 characters', (done) => {
 
             // Arrange
             const viewModel = {
                 name: 'arts',
                 city: 'Barcelona',
-                description: 'More than 10 characters'
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'
             };
 
             // Act
@@ -188,7 +187,7 @@ describe('Hotel Edit Validation tests', () => {
             const viewModel = {
                 name: '',
                 city: 'Barcelona',
-                description: 'less10'
+                description: 'Description'
             };
 
             // Act
