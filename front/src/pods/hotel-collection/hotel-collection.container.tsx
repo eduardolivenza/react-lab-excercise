@@ -33,10 +33,11 @@ export const HotelCollectionContainerInner = (props : Props) => {
     loadHotelCollection();
   }, []);
 
-  return <HotelCollectionComponent 
+  return  <HotelCollectionComponent 
             hotelCollection={hotelCollection} 
             editHotel = {editHotel}
           />;
 };
 
 export const HotelCollectionContainer = withRouter<Props>(HotelCollectionContainerInner);
+
