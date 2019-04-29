@@ -13,9 +13,9 @@ describe('validateStringMatch test', () => {
 
       // Assert
       expect(result).toEqual({
-        errorMessage: 'Validation failed',
+        errorMessage: '',
         key: '',
-        succeeded: false,
+        succeeded: true,
         type: VALIDATION_TYPE,
       } as FieldValidationResult);
     })
@@ -28,9 +28,9 @@ describe('validateStringMatch test', () => {
 
       // Assert
       expect(result).toEqual({
-        errorMessage: '',
+        errorMessage: 'Invalid selection',
         key: '',
-        succeeded: true,
+        succeeded: false,
         type: VALIDATION_TYPE,
       } as FieldValidationResult);
     })
@@ -43,9 +43,9 @@ describe('validateStringMatch test', () => {
 
       // Assert
       expect(result).toEqual({
-        errorMessage: '',
+        errorMessage: 'Invalid selection',
         key: '',
-        succeeded: true,
+        succeeded: false,
         type: VALIDATION_TYPE,
       } as FieldValidationResult);
     })
@@ -61,9 +61,9 @@ describe('validateStringMatch test', () => {
 
       // Assert
       expect(result).toEqual({
-        errorMessage: '',
+        errorMessage: 'Invalid selection',
         key: '',
-        succeeded: true,
+        succeeded: false,
         type: VALIDATION_TYPE,
       } as FieldValidationResult);
     })
