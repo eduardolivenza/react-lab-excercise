@@ -1,33 +1,34 @@
 import * as React from "react";
-import { withStyles, createStyles, WithStyles } from "@material-ui/core/styles";
 import { HotelEntityVm } from "./hotel-collection.vm";
-import { HotelCard } from "./components/hotel-card.component"; // on next step we will create this component
+import { HotelCollectionCardsComponent } from "./components/hotel-collection-cards.component";
+import { HotelCollectionTableComponent } from "./components/hotel-collection-table.component";
+import { HotelCollectionViewSelectorComponent, Layout } from "./components/hotel-collection-view-selector.component";
 
-interface Props extends WithStyles<typeof styles> {  
+interface Props{  
   hotelCollection: HotelEntityVm[];
   editHotel : (id : string) => void;
+  layout? : Layout;
 }
 
-const styles = theme => createStyles({
-    listLayout: {
-      display: "flex",
-      flexWrap: "wrap",
-      justifyContent: "space-between"
-    }
-  });
+export const HotelCollectionComponent : React.FunctionComponent<Props> = (props) => {
+  const { hotelCollection, editHotel, layout } = props;
+  const [componetLayout, setComponentLayout] = React.useState(layout);
 
-export const HotelCollectionComponentInner = (props: Props) => {
-  const { hotelCollection, classes, editHotel } = props;
+  let hotelCollectionComponent;
+  if(componetLayout === Layout.Card){
+    hotelCollectionComponent = <HotelCollectionCardsComponent hotelCollection={hotelCollection} editHotel={editHotel}/>;
+  }else if (componetLayout === Layout.Table){
+    hotelCollectionComponent = <HotelCollectionTableComponent hotelCollection={hotelCollection} editHotel={editHotel}/>;
+  }
 
   return (
-    <div className={classes.listLayout}>
-      {hotelCollection.map(hotel => (
-        <HotelCard hotel={hotel} key={hotel.id} editHotel={editHotel}/>
-      ))}
-    </div>
+    <>
+    <HotelCollectionViewSelectorComponent onChangeView={setComponentLayout} layout={componetLayout}/>
+    {hotelCollectionComponent}
+    </>
   );
 };
 
-export const HotelCollectionComponent = withStyles(styles)(
-  HotelCollectionComponentInner
-);
+HotelCollectionComponent.defaultProps = {
+  layout: Layout.Card,
+} 
