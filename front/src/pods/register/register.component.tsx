@@ -9,24 +9,26 @@ const styles = theme =>
     formContainer: {
       display: "flex",
       flexDirection: "column",
-      justifyContent: "center"
+      justifyContent: "center",
+      width: "400px",
     },
     buttonContainer: {
       marginBottom: 5,
       justifyContent: "center",
       flex: 1,
+      width: "100%",
     },
-    button:{
-      width:"100%",
+    button: {
+      width: "100%",
     }
   });
 
 interface Props extends WithStyles<typeof styles> {
-    onRegister: () => void;
-    onCancel: () => void;
-    regData: RegisterEntityVm;
-    onUpdateRegData: (name: keyof RegisterEntityVm, value: string) => void;
-    registerFormErrors: RegisterFormErrors;
+  onRegister: () => void;
+  onCancel: () => void;
+  regData: RegisterEntityVm;
+  onUpdateRegData: (name: keyof RegisterEntityVm, value: string) => void;
+  registerFormErrors: RegisterFormErrors;
 }
 
 export const RegisterComponentInner = (props: Props) => {
@@ -46,11 +48,23 @@ export const RegisterComponentInner = (props: Props) => {
         <CardContent>
           <div className={classes.formContainer}>
             <TextFieldForm
-              label="Name"
-              name="login"
-              value={regData.login}
+              label="FirstName"
+              name="firstName"
+              value={regData.firstName}
               onChange={onUpdateRegData}
-              error={registerFormErrors.login.errorMessage}
+            />
+            <TextFieldForm
+              label="LastName"
+              name="lastName"
+              value={regData.lastName}
+              onChange={onUpdateRegData}
+            />
+            <TextFieldForm
+              label="Email"
+              name="email"
+              value={regData.email}
+              onChange={onUpdateRegData}
+              error={registerFormErrors.email.errorMessage}
             />
             <TextFieldForm
               label="Password"
@@ -74,7 +88,7 @@ export const RegisterComponentInner = (props: Props) => {
             </Button>
             </div>
             <div className={classes.buttonContainer} >
-              <Button  className={classes.button} variant="contained" color="primary" onClick={onCancel}>
+              <Button className={classes.button} variant="contained" color="primary" onClick={onCancel}>
                 Cancel
             </Button>
             </div>

@@ -19,8 +19,9 @@ export const RegisterContainerInner = (props: Props) => {
       if (formValidationResult.succeeded) {
         console.log(" Register approved");
         registerNewUser(registerData).then(result => {
-          if (result.data.code == 200) {
-            console.log("Login successfull")
+          if (result.status === 200) {
+            alert("Login succesful");
+            history.goBack();
           }
         });
       }

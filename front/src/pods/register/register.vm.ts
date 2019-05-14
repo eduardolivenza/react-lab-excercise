@@ -1,25 +1,29 @@
 import { FieldValidationResult } from "lc-form-validation";
 
 export interface RegisterEntityVm {
-    login: string;
+    email: string;
+    firstName: string;
+    lastName: string;
     password: string;
     passwordConfirm: string;
   }
   
   export const createRegisterEntity = (): RegisterEntityVm => ({
-    login: "",
+    email: "",
+    firstName: "",
+    lastName: "",
     password: "",
     passwordConfirm: "",
   });
 
   export interface RegisterFormErrors {
-    login: FieldValidationResult;
+    email: FieldValidationResult;
     password: FieldValidationResult;
     passwordConfirm: FieldValidationResult;
   }
   
   export const createDefaultRegisterFormErrors = (): RegisterFormErrors => ({
-    login: new FieldValidationResult(),
+    email: new FieldValidationResult(),
     password: new FieldValidationResult(),
     passwordConfirm: new FieldValidationResult()
   });

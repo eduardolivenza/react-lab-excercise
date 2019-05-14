@@ -19,7 +19,7 @@ function passwordAndConfirmPasswordValidationHandler(value: any, vm: any): Field
 
 const registerFormValidationConstraints: ValidationConstraints = {
   fields: {
-    login: [{ validator: Validators.required }],
+    email: [{ validator: Validators.required }],
     password: [
       { validator: Validators.required },
       {
