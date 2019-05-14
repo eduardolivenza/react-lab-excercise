@@ -14,11 +14,20 @@ const styles = theme =>
       display: "flex",
       flexDirection: "column",
       justifyContent: "center"
+    },
+    buttonContainer: {
+      marginBottom: 5,
+      justifyContent: "center",
+      flex: 1,
+    },
+    button:{
+      width:"100%",
     }
   });
 
 interface Props extends WithStyles<typeof styles> {
   onLogin: () => void;
+  onRegister: () => void;
   credentials: LoginEntityVm;
   onUpdateCredentials: (name: keyof LoginEntityVm, value: string) => void;
   loginFormErrors: LoginFormErrors;
@@ -28,14 +37,13 @@ export const LoginComponentInner = (props: Props) => {
   const {
     classes,
     onLogin,
+    onRegister,
     credentials,
     onUpdateCredentials,
     loginFormErrors
   } = props;
 
-  const onTexFieldChange = (fieldId: keyof LoginEntityVm) => e => {
-    onUpdateCredentials(fieldId, e.target.value);
-  };
+
 
   return (
     <>
@@ -58,9 +66,16 @@ export const LoginComponentInner = (props: Props) => {
               onChange={onUpdateCredentials}
               error={loginFormErrors.password.errorMessage}
             />
-            <Button variant="contained" color="primary" onClick={onLogin}>
-              Login
+            <div className={classes.buttonContainer} >
+              <Button className={classes.button} variant="contained" color="primary" onClick={onLogin}>
+                Login
             </Button>
+            </div>
+            <div className={classes.buttonContainer} >
+              <Button  className={classes.button} variant="contained" color="primary" onClick={onRegister}>
+                Register new user
+            </Button>
+            </div>
           </div>
         </CardContent>
       </Card>

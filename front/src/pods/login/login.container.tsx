@@ -11,10 +11,10 @@ import {
 import { validateCredentials } from "./api";
 import { loginFormValidation } from "./login.validation";
 
-interface Props extends RouteComponentProps {}
+interface Props extends RouteComponentProps { }
 
 export const LoginContainerInner = (props: Props) => {
-  const loginContext = React.useContext(SessionContext);  
+  const loginContext = React.useContext(SessionContext);
   const [loginFormErrors, setLoginFormErrors] = React.useState<LoginFormErrors>(
     createDefaultLoginFormErrors()
   );
@@ -30,15 +30,16 @@ export const LoginContainerInner = (props: Props) => {
       if (formValidationResult.succeeded) {
         validateCredentials(credentials.login, credentials.password).then(
           areValidCredentials => {
-            if(areValidCredentials) {
-                  loginContext.updateLogin(credentials.login);
-                  history.push(routesLinks.hotelCollection);
-              } else {
-                  alert(
-                    "invalid credentials, use admin/test, excercise: display a mui snackbar instead of this alert."
-                    );
-              }  
-          }            
+            if (areValidCredentials) {
+              loginContext.updateLogin(credentials.login);
+              history.push(routesLinks.hotelCollection);
+            }
+            else {
+              alert(
+                "invalid credentials, use admin/test, excercise: display a mui snackbar instead of this alert."
+              );
+            }
+          }
         );
       } else {
         alert("error, review the fields");
@@ -50,6 +51,10 @@ export const LoginContainerInner = (props: Props) => {
       }
     });
   };
+
+  const goToRegister = () => {
+    history.push(routesLinks.register)
+  }
 
   const onUpdateCredentialsField = (name, value) => {
     setCredentials({
@@ -70,6 +75,7 @@ export const LoginContainerInner = (props: Props) => {
   return (
     <LoginComponent
       onLogin={doLogin}
+      onRegister={goToRegister}
       credentials={credentials}
       onUpdateCredentials={onUpdateCredentialsField}
       loginFormErrors={loginFormErrors}

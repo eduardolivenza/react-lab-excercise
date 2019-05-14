@@ -2,6 +2,7 @@ import { generatePath } from "react-router";
 
 interface BaseRoutes {
   login : string;
+  register: string;
   hotelCollection : string;
   hotelEdit: string;
 }
@@ -10,6 +11,7 @@ const appBaseRoutes : BaseRoutes = {
   login: '/',
   hotelCollection: '/hotel-collection',
   hotelEdit: '/hotel-edit',
+  register: '/register',
 }
 
 type RouterSwitchRoutes = BaseRoutes;
