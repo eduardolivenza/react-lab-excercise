@@ -32,7 +32,7 @@ export const LoginContainerInner = (props: Props) => {
           areValidCredentials => {
             if (areValidCredentials) {
               loginContext.updateLogin(credentials.login);
-              history.push(routesLinks.hotelCollection);
+              history.push(routesLinks.userCollection);
             }
             else {
               alert(

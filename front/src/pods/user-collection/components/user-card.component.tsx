@@ -1,9 +1,8 @@
 import * as React from "react";
 import Card from "@material-ui/core/Card";
-import { HotelEntityVm } from "../hotel-collection.vm";
+import { UserEntityVm } from "../user-collection.vm";
 import {Theme} from "@material-ui/core/styles";
 import CardHeader from "@material-ui/core/CardHeader/CardHeader";
-import Avatar from "@material-ui/core/Avatar/Avatar";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import EditIcon from "@material-ui/icons/edit";
@@ -17,7 +16,7 @@ import {
 import { withStyles, createStyles, WithStyles } from "@material-ui/core/styles";
 
 interface Props extends WithStyles<typeof styles> {
-  hotel: HotelEntityVm;
+  user: UserEntityVm;
   editHotel : (id : string) => void;  
 }
 
@@ -29,20 +28,20 @@ const styles = (theme : Theme)  =>
     }
   });
 
-export const HotelCardInner = (props: Props) => {
-  const {hotel, classes, editHotel} = props;
+export const UserCardInner = (props: Props) => {
+  const {user, classes, editHotel} = props;
 
   return (
     <Card className={classes.card}>
       <CardHeader
-        avatar={<Avatar aria-label="Hotel">{hotel.rating}</Avatar>}
+        //avatar={<Avatar aria-label="Hotel">{user.rating}</Avatar>}
         action={
           <IconButton>
             <MoreVertIcon />
           </IconButton>
         }
-        title={hotel.name}
-        subheader={hotel.address}
+        title={user.firstName}
+        subheader={user.email}
       />
       <CardContent>
         <div
@@ -53,17 +52,17 @@ export const HotelCardInner = (props: Props) => {
           }}
         >
           <CardMedia
-            image={hotel.picture}
-            title={hotel.name}
+            image={user.picture}
+            title={user.firstName}
             style={{ height: 0, paddingTop: "56.25%" }}
           />
           <Typography variant="subtitle1" gutterBottom>
-            {hotel.description}
+            Description
           </Typography>
         </div>
       </CardContent>
       <CardActions disableActionSpacing>
-        <IconButton aria-label="Add to favorites" onClick={() => editHotel(hotel.id)}>
+        <IconButton aria-label="Add to favorites" onClick={() => editHotel(user.email)}>
           <EditIcon />
         </IconButton>
         <IconButton aria-label="Share">
@@ -74,4 +73,4 @@ export const HotelCardInner = (props: Props) => {
   );
 };
 
-export const HotelCard = withStyles(styles)(HotelCardInner);
+export const UserCard = withStyles(styles)(UserCardInner);
