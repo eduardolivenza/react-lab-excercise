@@ -2,6 +2,7 @@ import { createStyles, WithStyles, Card, CardHeader, CardContent, Button, withSt
 import React from "react";
 import { RegisterEntityVm, RegisterFormErrors } from "./register.vm";
 import { TextFieldForm } from "common/components";
+import {DropzoneArea} from 'material-ui-dropzone'
 
 
 const styles = theme =>
@@ -10,7 +11,6 @@ const styles = theme =>
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
-      width: "400px",
     },
     buttonContainer: {
       marginBottom: 5,
@@ -29,9 +29,11 @@ interface Props extends WithStyles<typeof styles> {
   regData: RegisterEntityVm;
   onUpdateRegData: (name: keyof RegisterEntityVm, value: string) => void;
   registerFormErrors: RegisterFormErrors;
+  onChangeDrop: (files: File[]) => void;
 }
 
 export const RegisterComponentInner = (props: Props) => {
+  
   const {
     classes,
     onCancel,
@@ -39,6 +41,7 @@ export const RegisterComponentInner = (props: Props) => {
     regData,
     onUpdateRegData,
     registerFormErrors,
+    onChangeDrop,
   } = props;
 
   return (
@@ -81,6 +84,9 @@ export const RegisterComponentInner = (props: Props) => {
               value={regData.passwordConfirm}
               onChange={onUpdateRegData}
               error={registerFormErrors.passwordConfirm.errorMessage}
+            />
+             <DropzoneArea 
+                onChange={onChangeDrop}
             />
             <div className={classes.buttonContainer} >
               <Button className={classes.button} variant="contained" color="primary" onClick={onRegister}>

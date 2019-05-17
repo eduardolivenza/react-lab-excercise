@@ -51,6 +51,14 @@ export const RegisterContainerInner = (props: Props) => {
       });
   };
 
+  const onChangeDrop = (files: File[]) => {
+    console.log(files);
+    let data = new FormData();
+    files.forEach((file: File, i) => {
+        data.append('file', file, file.name);
+    });
+  }
+
   return (
     <RegisterComponent
       onRegister={registerUser}
@@ -58,6 +66,7 @@ export const RegisterContainerInner = (props: Props) => {
       regData={registerData}
       onUpdateRegData={onUpdateRegisterDataFields}
       registerFormErrors={registerFormErrors}
+      onChangeDrop={onChangeDrop}
     />
   );
 };
